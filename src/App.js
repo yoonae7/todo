@@ -33,6 +33,7 @@ function App() {
           setImageOnRep = {setImageOnRep}
           clickHandler2={clickHandler2}
           />
+          <Mainpage />
           <Routes>
             <Route path='/' element=<Mainpage clickHandler={clickHandler} clickHandler2={clickHandler2}/>/>
             <Route path='/book' element=<Book data={data} setData={setData}/>/>

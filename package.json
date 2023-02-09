@@ -46,6 +46,7 @@
     "@babel/core": "^7.20.12",
     "@babel/node": "^7.20.7",
     "@babel/preset-env": "^7.20.2",
-    "babel-preset-mobx": "^2.0.0"
+    "babel-preset-mobx": "^2.0.0",
+    "gh-pages": "^5.0.0"
   }
 }
