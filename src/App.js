@@ -1,24 +1,46 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Mainpage from './Page/Mainpage';
+import Book from './Page/Book';
+import Repertoire from './Page/Repertoire';
+import Header from './Component/Header';
+import useFetch from './util/useFetch';
+import { useState } from 'react';
 
 function App() {
+  const [data, setData, error] = useFetch("http://localhost:3001/books");
+  const [data2, setData2, error2] = useFetch("http://localhost:3001/repertoire");
+  const [imageOnBook, setImageOnBook] = useState(false)
+  const [imageOnRep, setImageOnRep] = useState(false)
+
+  const clickHandler = () => {
+    setImageOnBook(!imageOnBook)
+  }
+
+  const clickHandler2 = () => {
+    setImageOnRep(!imageOnRep)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <BrowserRouter>
+      <div className='main'>
+        <div className='container'>
+          <Header 
+          imageOnBook={imageOnBook} 
+          setImageOnBook={setImageOnBook} 
+          clickHandler={clickHandler} 
+          imageOnRep={imageOnRep} 
+          setImageOnRep = {setImageOnRep}
+          clickHandler2={clickHandler2}
+          />
+          <Routes>
+            <Route path='/' element=<Mainpage clickHandler={clickHandler} clickHandler2={clickHandler2}/>/>
+            <Route path='/book' element=<Book data={data} setData={setData}/>/>
+            <Route path='/repertoire' element=<Repertoire data2={data2} setData2={setData2}/>/>
+          </Routes>
+        </div>
+      </div>
+    </BrowserRouter>
   );
 }
 
